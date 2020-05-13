@@ -13,6 +13,7 @@ class MyNotebook(tkinter.Frame):
                 # read file
                 filedata = None
                 #print ("Open file OK: %s" % self.filename)
+                self.tab1txtfile.delete('1.0', tkinter.END)
                 self.tab1txtfile.insert(tkinter.INSERT, "%s" % self.filename)
                 with open(self.filename, "rb") as f:
                     filedata = f.read()
@@ -22,7 +23,10 @@ class MyNotebook(tkinter.Frame):
                 m = hashlib.md5(filedata)
                 # sha256
                 sha1 = hashlib.sha1(filedata)
-                # show
+                # clear & show
+                self.tab1txtcrc32.delete('1.0', tkinter.END)
+                self.tab1txtmd5.delete('1.0', tkinter.END)
+                self.tab1txtsha1.delete('1.0', tkinter.END)
                 self.tab1txtcrc32.insert(tkinter.INSERT, "0x%08X" % crcval)
                 self.tab1txtmd5.insert  (tkinter.INSERT, "%s" % m.hexdigest().upper())
                 self.tab1txtsha1.insert (tkinter.INSERT, "%s" % sha1.hexdigest().upper())
